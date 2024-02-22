@@ -3,3 +3,4 @@ compiler/
 *.o
 *.img
 *.bin
+old/
