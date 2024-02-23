@@ -54,9 +54,9 @@ jmp $
 
 ; ---------------------------
 
-%include "a20.asm"
-%include "print.asm"
-%include "gdt.asm"
+%include "boot/a20.asm"
+%include "boot/print.asm"
+%include "boot/gdt.asm"
 
 bits 32
 _main32:
