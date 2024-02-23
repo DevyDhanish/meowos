@@ -1,4 +1,4 @@
-compiler/
+x86_compiler/
 .vscode/
 *.o
 *.img
