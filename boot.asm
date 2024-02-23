@@ -1,6 +1,8 @@
 org 0x7c00
 bits 16
 
+KERNEL_OFFSET equ 0x1000
+
 ; all code between these lines
 
 ; set all the seg registers to 0, and set the sp to 0x7c00
@@ -22,10 +24,15 @@ call printstr
 mov si, info
 call printstr
 
-call read_disk
-
-mov si, OK
-call printstr
+; load sector and kernel
+mov bx, KERNEL_OFFSET
+mov ah, 2
+mov al, 20              ; loading 15 sectors
+mov ch, 0
+mov dh, 0
+mov cl, 2
+mov dl, [boot_drive]
+int 0x13
 
 call CheckA20       ; check if a20 is enabled, if not, enable it
 call CheckA20       ; if the above instruction enabled the a20 gate, check again to see if a20 is enabled
@@ -48,7 +55,6 @@ jmp $
 ; ---------------------------
 
 %include "a20.asm"
-%include "disk.asm"
 %include "print.asm"
 %include "gdt.asm"
 
@@ -57,19 +63,21 @@ _main32:
     mov ax, data_seg
     mov ds, ax
     mov ss, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
 
-    mov ebp, 0x9000
+    mov ebp, 0x90000
     mov esp, ebp
 
-    mov al, 'A'
-    mov ah, 0x0f
-    mov [0xb8000], ax
+    call KERNEL_OFFSET
 
     jmp $
 
 init_msg db "Stack initialized at - [0x7c00]", 13, 10, 0
 info  db "Attempting to read kernel from the disk", 13, 10, 0
 mode_info db "Switched to protected mode" 13,10,0
+boot_drive db 0
 
 times 510-($-$$) db 0
 

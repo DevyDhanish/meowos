@@ -37,6 +37,7 @@ CheckA20:
     pop ax
     mov byte es:[di], al
 
+    ; enable the a20 gate using the "fast a20 method"
     in al, 0x92
     or al, 2
     out 0x92, al
