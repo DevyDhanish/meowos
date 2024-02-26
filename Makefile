@@ -13,7 +13,10 @@ all:
 	$(CC) -ffreestanding -c $(KERNEL)/main.c -o $(BUILD)/kernel.o
 	$(CC) -c $(KERNEL)/vga/vga.c -o $(BUILD)/vga.o
 	$(CC) -c $(KERNEL)/stdio.c -o $(BUILD)/stdio.o
-	$(LD) -o $(BUILD)/kernel.bin -Ttext 0x1000 $(BUILD)/ke.o $(BUILD)/stdio.o $(BUILD)/vga.o $(BUILD)/kernel.o --oformat binary
+	$(CC) -c $(KERNEL)/utils.c -o $(BUILD)/utils.o
+	nasm -f elf32 $(KERNEL)/load_gdt.asm -o $(BUILD)/lg.o
+	$(CC) -c $(KERNEL)/gdt.c -o $(BUILD)/gdt.o
+	$(LD) -o $(BUILD)/kernel.bin -Ttext 0x1000 $(BUILD)/ke.o $(BUILD)/stdio.o $(BUILD)/lg.o $(BUILD)/gdt.o  $(BUILD)/utils.o $(BUILD)/vga.o $(BUILD)/kernel.o --oformat binary
 
 	cat $(BUILD)/boot.bin $(BUILD)/kernel.bin > $(BUILD)/boot.img
 	truncate -s 1440K $(BUILD)/boot.img

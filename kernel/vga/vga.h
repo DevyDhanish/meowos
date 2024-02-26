@@ -19,5 +19,6 @@ struct VGA_CHLOR
 void clearBuffer();
 void fillBuffer(struct VGA_CHLOR *);
 uint8 writeToBuffer(struct VGA_CHLOR *);
+void cursorToNewline();
 
 #endif 

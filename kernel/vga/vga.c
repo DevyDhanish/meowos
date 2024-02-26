@@ -54,3 +54,8 @@ uint8 writeToBuffer(struct VGA_CHLOR *write_chlor)
 
     return 0;
 }
+
+void cursorToNewline()
+{
+    VGA_INDEX = (VGA_INDEX / VGA_WIDTH + 1) * VGA_WIDTH;
+}

@@ -8,7 +8,6 @@ enum DATA_TYPES
     INT,
     STRING,
     FLOAT,
-    SHORT_INT,
     CHAR,
 };
 
