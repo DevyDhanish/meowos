@@ -3,8 +3,6 @@ section .text
 global load_gdt
 
 load_gdt:
-    mov eax, [eax + 4]
-
+    mov eax, ebp
     lgdt [eax]
-
     ret

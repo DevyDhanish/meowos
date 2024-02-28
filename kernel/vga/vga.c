@@ -33,6 +33,8 @@ void clearBuffer()
 
 void fillBuffer(struct VGA_CHLOR *fill_chlor)
 {
+    VGA_INDEX = 0;
+
     for(VGA_INDEX; VGA_INDEX < VGA_BUFFER_SIZE; inc_vga_index())
     {
         VGA_CHAR_BUFFER[VGA_INDEX] = *fill_chlor;

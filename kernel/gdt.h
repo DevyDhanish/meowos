@@ -20,8 +20,8 @@ typedef struct GDT_DISCRIPTOR
     uint32 offset;
 } __attribute__ ((packed)) GDTDISCRIPTOR;
 
-extern load_gdt(GDTDISCRIPTOR *gdt_desc);
-
+extern void load_gdt(GDTDISCRIPTOR *gdt_desc);
+extern GDTENTRY gdt_en[3];
 void gdt_init();
 
 #endif

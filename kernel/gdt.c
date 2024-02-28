@@ -38,10 +38,7 @@ void gdt_init()
     gdt_en[1] = code_en;
     gdt_en[2] = data_en;
 
-    gdt_desc.size = sizeof(gdt_en) - 1;
+    gdt_desc.size = sizeof(GDTENTRY) * 3 - 1;
     gdt_desc.offset = (uint32)&gdt_en;
-    
-    string msg = "GDT loaded into memory\n";
     load_gdt(&gdt_desc);
-    printf(STRING, msg);
 }

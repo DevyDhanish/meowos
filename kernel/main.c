@@ -2,6 +2,7 @@
 #include "stdio.h"
 #include "stddefs.h"
 #include "gdt.h"
+#include "idt.h"
 
 void main()
 {
@@ -14,7 +15,11 @@ void main()
     // code from here
     
     gdt_init();
+    idt_init();
 
-    string msg = "\nEverything is working\n";
+    float x = 10 / 0;
+
+
+    string msg = "Kernel is happy :)\n";
     printf(STRING, msg);
 }

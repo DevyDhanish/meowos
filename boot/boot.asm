@@ -27,7 +27,7 @@ call printstr
 ; load sector and kernel
 mov bx, KERNEL_OFFSET
 mov ah, 2
-mov al, 20              ; loading 15 sectors
+mov al, 40              ; loading 15 sectors
 mov ch, 0
 mov dh, 0
 mov cl, 2
